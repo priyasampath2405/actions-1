@@ -100,6 +100,14 @@ resource "aws_instance" "free_tier_instance" {
     ManagedBy   = "Terraform"
   }
 
+  # Lifecycle rule to prevent accidental replacement
+  lifecycle {
+    ignore_changes = [
+      ami,
+      user_data,
+    ]
+  }
+
   # Optional: Uncomment if you have a key pair for SSH access
   # key_name = "your-key-pair-name"
 }
